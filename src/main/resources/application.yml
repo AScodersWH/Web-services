@@ -1,0 +1,20 @@
+server:
+   port: 8080
+
+zuul:
+    routes:
+        todo-service:
+          path: /api/todos/**
+          url: http://127.0.0.1:8081
+          strip-prefix: false
+        user-service:
+          path: /api/user/**
+          url: http://127.0.0.1:8082
+          strip-prefix: false
+    sensitive-headers: 
+logging:
+  level:
+    org:
+      springframework:
+         cloud:
+           netflix: TRACE
