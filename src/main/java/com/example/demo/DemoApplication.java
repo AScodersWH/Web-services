@@ -8,7 +8,6 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @EnableZuulProxy
-@EnableFeignClients
 @SpringBootApplication
 @EnableHystrixDashboard
 @EnableCircuitBreaker

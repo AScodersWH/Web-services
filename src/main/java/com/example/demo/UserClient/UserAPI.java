@@ -15,9 +15,10 @@ public class UserAPI {
     UserClient userClient;
 
     @PostMapping("/api/login")
-    public String login(@RequestBody User user1) throws ChangeSetPersister.NotFoundException {
+    public String login(@RequestBody User user) throws ChangeSetPersister.NotFoundException {
         HashMap<String, Object> claims = new HashMap<>();
-        User user = userClient.verifyUser(user1);
+        User user1 = userClient.verifyUser(user);
+
         claims.put(user.getId().toString(), user.getName());
             String token = Jwts.builder()
                     .addClaims(claims)

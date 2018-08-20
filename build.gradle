@@ -16,9 +16,8 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'checkstyle'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'pmd'
-apply plugin: 'idea'
 
-group = 'com.example'
+group = 'com.thoughtworks.training.tomwang'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
@@ -33,32 +32,41 @@ ext {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile('org.springframework.cloud:spring-cloud-starter-feign')
-
 	compile('org.springframework.boot:spring-boot-starter')
-	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.cloud:spring-cloud-starter-zuul')
+
+    compile('org.springframework.boot:spring-boot-starter-security')
 	compile ('javax.xml.bind:jaxb-api:2.3.0')
 	compile ('io.jsonwebtoken:jjwt:0.9.1')
 	runtime('com.h2database:h2')
-	compile 'org.languagetool:language-en:4.2'
-	testCompile('org.springframework.security:spring-security-test')
-	compile('org.springframework.cloud:spring-cloud-starter-zuul')
-//	compile('org.springframework.cloud:spring-cloud-starter-consul-discovery')
+	runtime ('javax.xml.bind:jaxb-api')
+//    compile('org.springframework.cloud:spring-cloud-starter-consul-discovery')
+    testCompile('org.springframework.security:spring-security-test')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile 'org.languagetool:language-en:4.2'
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-//	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compileOnly('org.projectlombok:lombok')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile 'org.springframework.retry:spring-retry:1.1.2.RELEASE'
 	compile 'org.springframework.cloud:spring-cloud-starter-hystrix:1.3.5.RELEASE'
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard')
+	compileOnly('org.projectlombok:lombok')
 	runtime('mysql:mysql-connector-java')
-//	compile('org.flywaydb:flyway-core')
-	runtime ('javax.xml.bind:jaxb-api')
+	compile('org.flywaydb:flyway-core')
+	compile('org.flywaydb:flyway-core')
 	compile 'com.google.guava:guava:25.1-jre'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
+
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+tasks.withType(Checkstyle) {
+	reports {
+		xml.enabled false
+		html.enabled true
+		html.stylesheet resources.text.fromFile('config/xsl/checkstyle-custom.xsl')
 	}
 }

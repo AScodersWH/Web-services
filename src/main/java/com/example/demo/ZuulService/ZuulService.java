@@ -12,12 +12,18 @@ import java.util.HashMap;
 public class ZuulService {
 
     public static String generateJwtToken(HashMap hashMap) {
-        return Jwts.builder().addClaims(hashMap).signWith(SignatureAlgorithm.HS512, "kitty").compact();
+        return Jwts.builder()
+                .addClaims(hashMap)
+                .signWith(SignatureAlgorithm.HS512, "kitty")
+                .compact();
     }
 
     public static Claims verifyToken(String token) {
-        return Jwts.parser().setSigningKey("kitty")
-                .parseClaimsJws(token).getBody();
+        return Jwts
+                .parser()
+                .setSigningKey("kitty")
+                .parseClaimsJws(token)
+                .getBody();
 
     }
 
