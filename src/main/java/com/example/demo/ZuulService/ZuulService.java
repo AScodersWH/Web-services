@@ -1,12 +1,10 @@
 package com.example.demo.ZuulService;
 
-import com.example.demo.UserClient.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.Charset;
 import java.util.HashMap;
 @Service
 public class ZuulService {

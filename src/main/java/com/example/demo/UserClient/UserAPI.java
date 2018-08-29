@@ -2,24 +2,21 @@ package com.example.demo.UserClient;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 @RestController
+@Slf4j
 public class UserAPI {
-    @Autowired
-    UserClient userClient;
 
-    @PostMapping("/api/login")
-    public String login(@RequestBody User user) throws ChangeSetPersister.NotFoundException {
+    @PostMapping("/login")
+    public String login(@RequestBody User user){
         HashMap<String, Object> claims = new HashMap<>();
-        User user1 = userClient.verifyUser(user);
-
-        claims.put(user.getId().toString(), user.getName());
+        log.info("info logs");
+        claims.put( user.getName(),user.getPassword());
             String token = Jwts.builder()
                     .addClaims(claims)
                     .signWith(SignatureAlgorithm.HS512, "kitty".getBytes())

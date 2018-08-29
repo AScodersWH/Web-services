@@ -9,6 +9,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @EnableZuulProxy
 @SpringBootApplication
+@EnableFeignClients
 @EnableHystrixDashboard
 @EnableCircuitBreaker
 public class DemoApplication {
